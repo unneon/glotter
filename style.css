@@ -1,0 +1,23 @@
+.edge {
+    stroke: grey;
+    stroke-width: 5px;
+}
+.edge:hover {
+    stroke: black;
+    stroke-width: 10px;
+}
+
+.vertex {
+    stroke: grey;
+    stroke-width: 5px;
+    fill: transparent;
+}
+.vertex:hover {
+    stroke: black;
+    fill: aquamarine;
+}
+
+.vindex {
+    font-family: "Verdana";
+    fill: black;
+}

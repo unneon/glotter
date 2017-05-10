@@ -1,7 +1,26 @@
 var ws = undefined;
 
-var onMessageWS = function (ev) {
+var errorHandler = function (msg) {
+    // TODO
+};
 
+var graphAddEdge = function (a, b) {
+    document.getElementById('dumblog').textContent += "addEdge " + a + " " + b + "\n";
+};
+var graphResize = function (n) {
+    document.getElementById('dumblog').textContent += "resize " + n + "\n";
+};
+
+var onMessageWS = function (ev) {
+    console.log(ev.data);
+    var cmd = ev.data.split(' ');
+    if (cmd[0] === "addEdge") {
+        graphAddEdge(parseInt(cmd[1]), parseInt(cmd[2]));
+    } else if (cmd[0] === "resize") {
+        graphResize(parseInt(cmd[1]));
+    } else {
+        errorHandler("Unrecognized message.");
+    }
 };
 
 // setup WebSocket

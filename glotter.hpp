@@ -16,6 +16,9 @@ public:
         server.serve(".", 57077);
     }
 
+    void addEdge(int a, int b) { conn->send("addEdge " + std::to_string(a) + " " + std::to_string(b)); }
+    void resize(int n) { conn->send("resize " + std::to_string(n)); }
+
 private:
 
     struct HandlerWS : public seasocks::WebSocket::Handler {

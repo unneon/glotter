@@ -12,3 +12,31 @@
     font-family: "Verdana";
     fill: black;
 }
+
+.status-off {
+    color: grey;
+    border-color: grey;
+}
+.status-connecting {
+    color: green;
+    border-color: green;
+}
+.status-ready {
+    color: darkgreen;
+    border-color: darkgreen;
+}
+.status-closed {
+    color: black;
+    border-color: black;
+}
+.status-error, .status-unsupported {
+    color: red;
+    border-color: red;
+}
+#status-text {
+    text-align: center;
+}
+#status-hr {
+    border-color: inherit;
+    border-width: 5px;
+}

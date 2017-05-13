@@ -20,6 +20,9 @@ public:
                 } else if (req.getUrl().toString() == "/glotter.js") {
                     auto js = readFile("glotter.js");
                     res->end(js.c_str(), js.size());
+                } else if (req.getUrl().toString() == "/sigma.js") {
+                    auto sigma = readFile("sigma/sigma.min.js");
+                    res->end(sigma.c_str(), sigma.size());
                 }
             }
         });

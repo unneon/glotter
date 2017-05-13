@@ -1,36 +1,7 @@
-.edge {
-    stroke: grey;
-    stroke-width: 5px;
-}
-
-.vbase {
-    stroke: grey;
-    stroke-width: 5px;
-    fill: transparent;
-}
-.vindex {
-    font-family: "Verdana";
-    fill: black;
-    user-select: none;
-}
-
-svg {
+#graph {
+    position: absolute;
     width: 100%;
     height: 100%;
-}
-html {
-    height: 100%;
-}
-body {
-    height: 100%;
-}
-
-.template {
-    opacity: 0;
-}
-
-.selected {
-    opacity: 0.5;
 }
 
 .status-off {

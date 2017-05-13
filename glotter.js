@@ -4,62 +4,35 @@ var errorHandler = function (msg) {
     // TODO
 };
 
-var σ = new sigma('graph');
-
-    σ.graph.addNode({
-      // Main attributes:
-      id: 'n0',
-      label: 'Hello',
-      // Display attributes:
-      x: 0,
-      y: 0,
-      size: 1,
-      color: '#f00'
-    }).addNode({
-      // Main attributes:
-      id: 'n1',
-      label: 'World !',
-      // Display attributes:
-      x: 1,
-      y: 1,
-      size: 1,
-      color: '#00f'
-    }).addEdge({
-      id: 'e0',
-      // Reference extremities:
-      source: 'n0',
-      target: 'n1'
-    });
-    σ.refresh();
+var s = new sigma('graph');
 
 var graph = {
     addEdge: function (a, b) {
         var id = graph.stateid;
         graph.stateid = id + 1;
-        σ.graph.addEdge({
+        s.graph.addEdge({
             id: 'e'+id.toString(),
             source: 'v'+a.toString(),
             target: 'v'+b.toString(),
         });
-        σ.refresh();
+        s.refresh();
     },
     resize: function (newn) {
         if (newn > graph.n) {
             for (var i=graph.n; i<newn; ++i) {
-                σ.graph.addNode({
+                s.graph.addNode({
                     id: 'v' + i.toString(),
                     label: (i+1).toString(),
-                    x: 0,
-                    y: 0,
+                    x: Math.random(),
+                    y: Math.random(),
                     size: 1,
-                    color: '#f00',
                 });
                 graph.n = i+1;
             }
         } else if (newn < graph.n) {
             // TODO
         }
-        σ.refresh();
+        s.refresh();
     },
     n: 0,
     stateid: 0,

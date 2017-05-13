@@ -1,5 +1,8 @@
 var ws = undefined;
 
+var min = (a, b) => b < a ? b : a;
+var max = (a, b) => b > a ? b : a;
+
 var errorHandler = function (msg) {
     // TODO
 };
@@ -14,6 +17,7 @@ var graph = {
             id: 'e'+id.toString(),
             source: 'v'+a.toString(),
             target: 'v'+b.toString(),
+            color: "#000",
         });
         s.refresh();
     },
@@ -22,10 +26,11 @@ var graph = {
             for (var i=graph.n; i<newn; ++i) {
                 s.graph.addNode({
                     id: 'v' + i.toString(),
-                    label: (i+1).toString(),
+                    label: '['+(i+1).toString()+']',
                     x: Math.random(),
                     y: Math.random(),
                     size: 1,
+                    color: "#000",
                 });
                 graph.n = i+1;
             }
@@ -34,8 +39,34 @@ var graph = {
         }
         s.refresh();
     },
+    setVertexColor: function (v, col) {
+        var node = s.graph.nodes('v'+v.toString());
+        node.color = col;
+        s.refresh();
+    },
+    setEdgeColor: function (a, b, col) {
+        var edge = graph.findEdge(a, b);
+        edge.color = col;
+        s.refresh();
+    },
     n: 0,
     stateid: 0,
+    findEdge: function (a, b) {
+        var a1 = 'v' + min(a, b).toString();
+        var b1 = 'v' + max(a, b).toString();
+        console.log('looking for ' + a1.toString() + ' ' + b1.toString());
+        var es = s.graph.edges();
+        for (var e of es) {
+            var a2 = min(e.source, e.target);
+            var b2 = max(e.source, e.target);
+            console.log('candidate ' + a2.toString() + ' ' + b2.toString());
+            if (a1 == a2 && b1 == b2) {
+                console.log('found!');
+                return e;
+            }
+        }
+        return undefined;
+    }
 };
 
 var onMessageWS = function (ev) {
@@ -45,6 +76,10 @@ var onMessageWS = function (ev) {
         graph.addEdge(parseInt(cmd[1]), parseInt(cmd[2]));
     } else if (cmd[0] === "resize") {
         graph.resize(parseInt(cmd[1]));
+    } else if (cmd[0] === "setEdgeColor") {
+        graph.setEdgeColor(parseInt(cmd[1]), parseInt(cmd[2]), cmd[3]);
+    } else if (cmd[0] === "setVertexColor") {
+        graph.setVertexColor(parseInt(cmd[1]), cmd[2]);
     } else {
         errorHandler("Unrecognized message.");
     }

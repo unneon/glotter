@@ -11,19 +11,16 @@ public:
         uws.onHttpRequest([&](uWS::HttpResponse* res, uWS::HttpRequest req, char* data, size_t len, size_t remain){
             std::cout << (req.getMethod() == uWS::METHOD_GET ? "GET " : "(unknown method) ") << req.getUrl().toString() << std::endl;
             if (req.getMethod() == uWS::METHOD_GET) {
-                if (req.getUrl().toString() == "/") {
-                    auto html = readFile("index.html");
-                    res->end(html.c_str(), html.size());
-                } else if (req.getUrl().toString() == "/style.css") {
-                    auto css = readFile("style.css");
-                    res->end(css.c_str(), css.size());
-                } else if (req.getUrl().toString() == "/glotter.js") {
-                    auto js = readFile("glotter.js");
-                    res->end(js.c_str(), js.size());
-                } else if (req.getUrl().toString() == "/sigma.js") {
-                    auto sigma = readFile("sigma/sigma.min.js");
-                    res->end(sigma.c_str(), sigma.size());
-                }
+                auto sharefile = [&](const char* alias, const char* name){
+                    if (req.getUrl().toString() == alias) {
+                        auto r = readFile(name);
+                        res->end(r.c_str(), r.size());
+                    }
+                };
+                sharefile("/", "index.html");
+                sharefile("/style.css", "style.css");
+                sharefile("/glotter.js", "glotter.js");
+                sharefile("/sigma.js", "sigma/sigma.min.js");
             }
         });
         uws.onConnection([&](uWS::WebSocket<uWS::SERVER>* conn, auto){

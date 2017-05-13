@@ -9,7 +9,7 @@ public:
 
     Glotter(){
         uws.onHttpRequest([&](uWS::HttpResponse* res, uWS::HttpRequest req, char* data, size_t len, size_t remain){
-            std::clog << "'" << req.getUrl().toString() << "'" << std::endl;
+            std::cout << (req.getMethod() == uWS::METHOD_GET ? "GET " : "(unknown method) ") << req.getUrl().toString() << std::endl;
             if (req.getMethod() == uWS::METHOD_GET) {
                 if (req.getUrl().toString() == "/") {
                     auto html = readFile("index.html");
@@ -24,18 +24,21 @@ public:
             }
         });
         uws.onConnection([&](uWS::WebSocket<uWS::SERVER>* conn, auto){
-            std::cout << "something connected!" << std::endl;
+            std::cout << "Connected on WebSocket" << std::endl;
             ws = conn;
         });
-        uws.listen(57077);
+		auto port = 57077;
+        uws.listen(port);
         std::thread([&]{uws.run();}).detach();
-        std::clog << "hoooray!" << std::endl;
+		std::cout << "Listening on port " << port << std::endl;
     }
 
     void addEdge(int a, int b){
+        std::cout << "Adding edge " << (a+1) << "-" << (b+1) << std::endl;
         send("addEdge " + std::to_string(a) + " " + std::to_string(b));
     }
     void resize(int n){
+        std::cout << "Graph now hold " << n << " vertices" << std::endl;
         send("resize " + std::to_string(n));
     }
 

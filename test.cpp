@@ -15,7 +15,6 @@ int main() {
     auto m = load<int>();
     auto graph = Graph(n);
     for (int i=0; i<m; ++i) {
-        std::clog << "loading edge " << (i+1) << std::endl;
         auto a = load<int>() - 1;
         auto b = load<int>() - 1;
         graph.addEdge2(a, b);

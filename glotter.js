@@ -34,7 +34,7 @@ var onMessageWS = function (ev) {
     }
     elstat.className = 'status-connecting';
     elstattext.textContent = 'Connecting...'
-    ws = new WebSocket("ws://localhost:57077/ws");
+    ws = new WebSocket("ws://localhost:57077");
     ws.onopen = function() {
         elstat.className = 'status-ready';
         elstattext.textContent = 'Ready.';

@@ -23,12 +23,21 @@ public:
                 }
             }
         });
+        uws.onConnection([&](uWS::WebSocket<uWS::SERVER>* conn, auto){
+            std::cout << "something connected!" << std::endl;
+            ws = conn;
+        });
         uws.listen(57077);
-        uws.run();
+        std::thread([&]{uws.run();}).detach();
+        std::clog << "hoooray!" << std::endl;
     }
 
-    void addEdge(int a, int b){}
-    void resize(int n){}
+    void addEdge(int a, int b){
+        send("addEdge " + std::to_string(a) + " " + std::to_string(b));
+    }
+    void resize(int n){
+        send("resize " + std::to_string(n));
+    }
 
 private:
 
@@ -40,7 +49,16 @@ private:
         std::getline(file, buf, '\0');
         return buf;
     }
+    void send(const std::string& s) {
+        if (!ws) {
+            std::cout << "Waiting for connection..." << std::endl;
+            while (!ws)
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        }
+        ws->send(s.c_str(), s.size(), uWS::OpCode::TEXT);
+    }
 
     uWS::Hub uws;
+    uWS::WebSocket<uWS::SERVER>* ws = nullptr;
 
 };

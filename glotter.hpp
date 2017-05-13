@@ -33,11 +33,16 @@ public:
 		std::cout << "Listening on port " << port << std::endl;
     }
 
-    void addEdge(int a, int b){
-        std::cout << "Adding edge " << (a+1) << "-" << (b+1) << std::endl;
+    void addEdge1(int a, int b){
+        std::cout << "Adding edge " << (a+1) << "  -> " << (b+1) << std::endl;
         send("addEdge " + std::to_string(a) + " " + std::to_string(b));
     }
-    void setEdgeColor(int a, int b, const std::string& color) {
+    void addEdge2(int a, int b){
+        std::cout << "Adding edge " << (a+1) << " <-> " << (b+1) << std::endl;
+        send("addEdge " + std::to_string(a) + " " + std::to_string(b));
+        send("addEdge " + std::to_string(b) + " " + std::to_string(a));
+    }
+    void setEdge1Color(int a, int b, const std::string& color) {
         std::cout << "Coloring edge " << (a+1) << "-" << (b+1) << " to " << color << std::endl;
         send("setEdgeColor " + std::to_string(a) + " " + std::to_string(b) + " " + color);
     }

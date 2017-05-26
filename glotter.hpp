@@ -19,7 +19,7 @@ public:
                 };
                 sharefile("/", "index.html");
                 sharefile("/style.css", "style.css");
-                sharefile("/glotter.js", "glotter.js");
+                sharefile("/bundle.js", "bundle.js");
             }
         });
         uws.onConnection([&](uWS::WebSocket<uWS::SERVER>* conn, auto){

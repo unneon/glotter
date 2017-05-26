@@ -7,47 +7,30 @@ var errorHandler = function (msg) {
     // TODO
 };
 
-var s = new sigma('graph');
+// TODO: var s
 
 var graph = {
     getEId: (a, b) => 'e'+a.toString()+'_'+b.toString(),
     getVId: v => 'v'+v.toString(),
     addEdge: function (a, b) {
-        s.graph.addEdge({
-            id: graph.getEId(a, b),
-            source: graph.getVId(a),
-            target: graph.getVId(b),
-            color: "#000",
-        });
-        s.refresh();
+
     },
     resize: function (newn) {
         if (newn > graph.n) {
             for (var i=graph.n; i<newn; ++i) {
-                s.graph.addNode({
-                    id: graph.getVId(i),
-                    label: '['+(i+1).toString()+']',
-                    x: Math.random(),
-                    y: Math.random(),
-                    size: 1,
-                    color: "#000",
-                });
+                // TODO: add vertex
                 graph.n = i+1;
             }
         } else if (newn < graph.n) {
-            // TODO
-        }
-        s.refresh();
+            // TODO: downsize graph
+		}
+        // TODO: refresh
     },
     setVertexColor: function (v, col) {
-        var node = s.graph.nodes(graph.getVId(v));
-        node.color = col;
-        s.refresh();
+        // TODO: set vertex color
     },
     setEdgeColor: function (a, b, col) {
-        var edge = s.graph.edges(graph.getEId(a, b));
-        edge.color = col;
-        s.refresh();
+        // TODO: set edge color
     },
     n: 0,
 };

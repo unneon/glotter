@@ -18,15 +18,15 @@ struct Graph {
         std::vector<bool> visit(size(), false);
         visit[vertex] = true;
         while (not as.empty()) {
-            for (auto v : as) glotter.setVertexColor(v, "#f00");
+            for (auto v : as) glotter.setVertexColor(v, "#ff0000");
             for (auto v : as) {
                 f(v);
                 for (auto kid : edges[v]) {
-                    glotter.setEdge1Color(v, kid, "#888");
+                    glotter.setEdge1Color(v, kid, "#888888");
                     if (!visit[kid]) {
                         visit[kid] = true;
                         bs.push_back(kid);
-                        glotter.setVertexColor(kid, "#880");
+                        glotter.setVertexColor(kid, "#888800");
                     }
                 }
             }

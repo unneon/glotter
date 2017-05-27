@@ -22,10 +22,10 @@ var graph = {
 		var clickedNode = graph.nodes.get(graph.n);
 		clickedNode.color = {
 			border: '#000000',
-			background: '#000000',
+			background: '#ffffff',
 			highlight: {
-				border: '#2B7CE9',
-				background: '#D2E5FF'
+				border: '#000000',
+				background: '#ffffff'
 			}
 		};
 		graph.nodes.update(clickedNode);
@@ -41,7 +41,9 @@ var graph = {
 		}
     },
     setVertexColor: function (v, col) {
-		// TODO: set vertex color
+		var node = graph.nodes.get(v);
+		node.color.background = col;
+		graph.nodes.update(node);
     },
     setEdgeColor: function (a, b, col) {
         // TODO: set edge color

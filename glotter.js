@@ -7,25 +7,18 @@ var errorHandler = function (msg) {
     // TODO
 };
 
-// TODO: var s
-var nodes = new vis.DataSet([
-]);
-var edges = new vis.DataSet([
-]);
-var container = document.getElementById('graph');
-var data = {
-	nodes: nodes,
-	edges: edges
-};
-var options = {};
-var network = new vis.Network(container, data, options);
-
 var graph = {
+	nodes: new vis.DataSet([
+	]),
+	edges: new vis.DataSet([
+	]),
+	container: document.getElementById('graph'),
+	options: {},
     addEdge: function (a, b) {
-		edges.add({from: a, to: b});
+		graph.edges.add({from: a, to: b});
     },
 	createVertex: function() {
-		nodes.add({id: graph.n, label: (graph.n+1).toString()});
+		graph.nodes.add({id: graph.n, label: (graph.n+1).toString()});
 		graph.n += 1;
 	},
     resize: function (newn) {
@@ -45,6 +38,8 @@ var graph = {
     },
     n: 0,
 };
+graph.data = {nodes: graph.nodes, edges: graph.edges};
+graph.network = new vis.Network(graph.container, graph.data, graph.options);
 
 var onMessageWS = function (ev) {
     var cmd = ev.data.split(' ');

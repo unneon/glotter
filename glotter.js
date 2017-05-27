@@ -20,6 +20,11 @@ var graph = {
 			to: b,
 			id: a+'-'+b,
 			width: 3,
+			arrows: {
+				to: {
+					enabled: true
+				}
+			},
 			color: {
 				color: "#000000",
 				highlight: "#000000"

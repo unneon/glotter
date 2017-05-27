@@ -8,23 +8,34 @@ var errorHandler = function (msg) {
 };
 
 // TODO: var s
+var nodes = new vis.DataSet([
+]);
+var edges = new vis.DataSet([
+]);
+var container = document.getElementById('graph');
+var data = {
+	nodes: nodes,
+	edges: edges
+};
+var options = {};
+var network = new vis.Network(container, data, options);
 
 var graph = {
-    getEId: (a, b) => 'e'+a.toString()+'_'+b.toString(),
-    getVId: v => 'v'+v.toString(),
     addEdge: function (a, b) {
-
+		edges.add({from: a, to: b});
     },
+	createVertex: function() {
+		nodes.add({id: graph.n, label: (graph.n+1).toString()});
+		graph.n += 1;
+	},
     resize: function (newn) {
         if (newn > graph.n) {
             for (var i=graph.n; i<newn; ++i) {
-                // TODO: add vertex
-                graph.n = i+1;
+				graph.createVertex();
             }
         } else if (newn < graph.n) {
             // TODO: downsize graph
 		}
-        // TODO: refresh
     },
     setVertexColor: function (v, col) {
         // TODO: set vertex color

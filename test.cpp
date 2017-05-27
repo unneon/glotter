@@ -18,7 +18,7 @@ struct Graph {
         std::vector<bool> visit(size(), false);
         visit[vertex] = true;
         while (not as.empty()) {
-            for (auto v : as) glotter.setVertexColor(v, "#ff0000");
+            for (auto v : as) glotter.setVertexColor(v, "#0000ff");
             for (auto v : as) {
                 f(v);
                 for (auto kid : edges[v]) {
@@ -30,6 +30,7 @@ struct Graph {
                     }
                 }
             }
+			for (auto v : as) glotter.setVertexColor(v, "#ff0000");
             as = std::move(bs);
         }
     }

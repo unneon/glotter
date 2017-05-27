@@ -19,7 +19,6 @@ var graph = {
 			from: a,
 			to: b,
 			id: a+'-'+b,
-			width: 3,
 			arrows: {
 				to: {
 					enabled: true
@@ -32,17 +31,18 @@ var graph = {
 		});
     },
 	createVertex: function() {
-		graph.nodes.add({id: graph.n, label: (graph.n+1).toString()});
-		var clickedNode = graph.nodes.get(graph.n);
-		clickedNode.color = {
-			border: '#000000',
-			background: '#ffffff',
-			highlight: {
+		graph.nodes.add({
+			id: graph.n,
+			label: (graph.n+1).toString(),
+			color: {
 				border: '#000000',
-				background: '#ffffff'
+				background: '#ffffff',
+				highlight: {
+					border: '#000000',
+					background: '#ffffff'
+				}
 			}
-		};
-		graph.nodes.update(clickedNode);
+		});
 		graph.n += 1;
 	},
     resize: function (newn) {
@@ -57,10 +57,10 @@ var graph = {
     setVertexColor: function (v, col) {
 		var node = graph.nodes.get(v);
 		node.color.background = col;
+		node.color.highlight.background = col;
 		graph.nodes.update(node);
     },
     setEdgeColor: function (a, b, col) {
-        // TODO: set edge color
 		var edge = graph.edges.get(a+'-'+b);
 		edge.color.color = col;
 		edge.color.highlight = col;

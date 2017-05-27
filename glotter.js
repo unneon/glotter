@@ -15,7 +15,16 @@ var graph = {
 	container: document.getElementById('graph'),
 	options: {},
     addEdge: function (a, b) {
-		graph.edges.add({from: a, to: b});
+		graph.edges.add({
+			from: a,
+			to: b,
+			id: a+'-'+b,
+			width: 3,
+			color: {
+				color: "#000000",
+				highlight: "#000000"
+			}
+		});
     },
 	createVertex: function() {
 		graph.nodes.add({id: graph.n, label: (graph.n+1).toString()});
@@ -47,6 +56,10 @@ var graph = {
     },
     setEdgeColor: function (a, b, col) {
         // TODO: set edge color
+		var edge = graph.edges.get(a+'-'+b);
+		edge.color.color = col;
+		edge.color.highlight = col;
+		graph.edges.update(edge);
     },
     n: 0,
 };

@@ -19,6 +19,16 @@ var graph = {
     },
 	createVertex: function() {
 		graph.nodes.add({id: graph.n, label: (graph.n+1).toString()});
+		var clickedNode = graph.nodes.get(graph.n);
+		clickedNode.color = {
+			border: '#000000',
+			background: '#000000',
+			highlight: {
+				border: '#2B7CE9',
+				background: '#D2E5FF'
+			}
+		};
+		graph.nodes.update(clickedNode);
 		graph.n += 1;
 	},
     resize: function (newn) {
@@ -31,7 +41,7 @@ var graph = {
 		}
     },
     setVertexColor: function (v, col) {
-        // TODO: set vertex color
+		// TODO: set vertex color
     },
     setEdgeColor: function (a, b, col) {
         // TODO: set edge color

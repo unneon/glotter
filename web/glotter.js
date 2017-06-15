@@ -129,8 +129,8 @@ var bind = function (f, ...xs) {
     }
     statusBar('Connecting...', 'status-connecting');
     ws = new WebSocket("ws://localhost:57077");
-    ws.onopen = bind(statusBar, 'Ready.', 'status-ready');
-    ws.onclose = bind(statusBar, 'Connection closed.', 'status-closed');
-    ws.onerror = bind(statusBar, 'WebSocket error.', 'status-error');
+    ws.onopen = bind(statusBar, 'Ready', 'status-ready');
+    ws.onclose = bind(statusBar, 'Connection closed', 'status-closed');
+    ws.onerror = bind(statusBar, 'WebSocket error', 'status-error');
     ws.onmessage = onMessageWS;
 })();

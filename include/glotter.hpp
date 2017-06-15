@@ -20,6 +20,7 @@ public:
                 sharefile("/", "web/index.html");
                 sharefile("/style.css", "web/style.css");
                 sharefile("/glotter.js", "web/glotter.js");
+				sharefile("/bebas.otf", "web/BebasNeue Regular.otf");
             }
         });
         uws.onConnection([&](uWS::WebSocket<uWS::SERVER>* conn, auto){

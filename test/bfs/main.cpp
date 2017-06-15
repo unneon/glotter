@@ -1,4 +1,4 @@
-#include "glotter.hpp"
+#include <glotter.hpp>
 using namespace std;
 
 Glotter glotter;

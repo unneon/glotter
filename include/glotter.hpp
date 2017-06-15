@@ -17,9 +17,9 @@ public:
                         res->end(r.c_str(), r.size());
                     }
                 };
-                sharefile("/", "index.html");
-                sharefile("/style.css", "style.css");
-                sharefile("/glotter.js", "glotter.js");
+                sharefile("/", "web/index.html");
+                sharefile("/style.css", "web/style.css");
+                sharefile("/glotter.js", "web/glotter.js");
             }
         });
         uws.onConnection([&](uWS::WebSocket<uWS::SERVER>* conn, auto){

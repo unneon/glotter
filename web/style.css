@@ -1,33 +1,42 @@
+/* http://paletton.com/#uid=13v0u0k00bp0CPg0aCMlY4yhN07 */
+
+.bar {
+	flex: 0 1 auto;
+	height: 10%;
+	width: 100%;
+
+	background-color: #3A3A3A;
+}
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #D9DCDD;
+	display: flex;
+	flex-flow: column;
+}
+
 #graph {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+	flex: 1 1 auto;
+}
+
+.status-closed, .status-connecting, .status-error, .status-off, .status-ready, .status-unsupported {
+	margin: 4%;
+	height: 92%;
+	width: 20%;
 }
 
 .status-off {
-    color: grey;
-    border-color: grey;
+    background-color: grey;
 }
 .status-connecting {
-    color: green;
-    border-color: green;
+    background-color: green;
 }
 .status-ready {
-    color: darkgreen;
-    border-color: darkgreen;
+    background-color: darkgreen;
 }
 .status-closed {
-    color: black;
-    border-color: black;
+    background-color: black;
 }
 .status-error, .status-unsupported {
-    color: red;
-    border-color: red;
-}
-#status-text {
-    text-align: center;
-}
-#status-hr {
-    border-color: inherit;
-    border-width: 5px;
+    background-color: red;
 }

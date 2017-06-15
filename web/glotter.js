@@ -14,16 +14,28 @@ var graph = {
 	]),
 	container: document.getElementById('graph'),
 	options: {},
-    addEdge: function (a, b) {
+    addEdge1: function (a, b) {
 		graph.edges.add({
 			from: a,
 			to: b,
-			id: a+'-'+b,
+			id: a+'->'+b,
 			arrows: {
 				to: {
 					enabled: true
 				}
 			},
+			color: {
+				color: "#000000",
+				highlight: "#000000"
+			}
+		});
+    },
+	addEdge2: function (a, b) {
+		if (a > b) { t = a; a = b; b = t; }
+		graph.edges.add({
+			from: a,
+			to: b,
+			id: a+'<->'+b,
 			color: {
 				color: "#000000",
 				highlight: "#000000"
@@ -60,8 +72,15 @@ var graph = {
 		node.color.highlight.background = col;
 		graph.nodes.update(node);
     },
-    setEdgeColor: function (a, b, col) {
-		var edge = graph.edges.get(a+'-'+b);
+    setEdge1Color: function (a, b, col) {
+		var edge = graph.edges.get(a+'->'+b);
+		edge.color.color = col;
+		edge.color.highlight = col;
+		graph.edges.update(edge);
+    },
+	setEdge2Color: function (a, b, col) {
+		if (a > b) { t = a; a = b; b = t; }
+		var edge = graph.edges.get(a+'<->'+b);
 		edge.color.color = col;
 		edge.color.highlight = col;
 		graph.edges.update(edge);
@@ -73,12 +92,17 @@ graph.network = new vis.Network(graph.container, graph.data, graph.options);
 
 var onMessageWS = function (ev) {
     var cmd = ev.data.split(' ');
-    if (cmd[0] === "addEdge") {
-        graph.addEdge(parseInt(cmd[1]), parseInt(cmd[2]));
+	// TODO: change this to a map or object[propertyname] call or something
+    if (cmd[0] === "addEdge1") {
+        graph.addEdge1(parseInt(cmd[1]), parseInt(cmd[2]));
+	} else if (cmd[0] === "addEdge2") {
+		graph.addEdge2(parseInt(cmd[1]), parseInt(cmd[2]));
     } else if (cmd[0] === "resize") {
         graph.resize(parseInt(cmd[1]));
-    } else if (cmd[0] === "setEdgeColor") {
-        graph.setEdgeColor(parseInt(cmd[1]), parseInt(cmd[2]), cmd[3]);
+    } else if (cmd[0] === "setEdge1Color") {
+        graph.setEdge1Color(parseInt(cmd[1]), parseInt(cmd[2]), cmd[3]);
+	} else if (cmd[0] === "setEdge2Color") {
+		graph.setEdge2Color(parseInt(cmd[1]), parseInt(cmd[2]), cmd[3]);
     } else if (cmd[0] === "setVertexColor") {
         graph.setVertexColor(parseInt(cmd[1]), cmd[2]);
     } else {

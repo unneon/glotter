@@ -22,7 +22,7 @@ struct Graph {
             for (auto v : as) {
                 f(v);
                 for (auto kid : edges[v]) {
-                    glotter.setEdge1Color(v, kid, "#888888");
+                    glotter.setEdge2Color(v, kid, "#888888");
                     if (!visit[kid]) {
                         visit[kid] = true;
                         bs.push_back(kid);

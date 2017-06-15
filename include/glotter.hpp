@@ -8,7 +8,7 @@ class Glotter {
 public:
 
     Glotter(){
-        uws.onHttpRequest([&](uWS::HttpResponse* res, uWS::HttpRequest req, char* data, size_t len, size_t remain){
+        uws.onHttpRequest([&](uWS::HttpResponse* res, uWS::HttpRequest req, char* /*data*/, size_t /*len*/, size_t /*remain*/){
             std::cout << (req.getMethod() == uWS::METHOD_GET ? "GET " : "(unknown method) ") << req.getUrl().toString() << std::endl;
             if (req.getMethod() == uWS::METHOD_GET) {
                 auto sharefile = [&](const char* alias, const char* name){
@@ -33,24 +33,21 @@ public:
     }
 
     void addEdge1(int a, int b){
-        std::cout << "Adding edge " << (a+1) << "  -> " << (b+1) << std::endl;
-        send("addEdge " + std::to_string(a) + " " + std::to_string(b));
+        send("addEdge1 " + std::to_string(a) + " " + std::to_string(b));
     }
     void addEdge2(int a, int b){
-        std::cout << "Adding edge " << (a+1) << " <-> " << (b+1) << std::endl;
-        send("addEdge " + std::to_string(a) + " " + std::to_string(b));
-        send("addEdge " + std::to_string(b) + " " + std::to_string(a));
+        send("addEdge2 " + std::to_string(a) + " " + std::to_string(b));
     }
     void setEdge1Color(int a, int b, const std::string& color) {
-        std::cout << "Coloring edge " << (a+1) << "-" << (b+1) << " to " << color << std::endl;
-        send("setEdgeColor " + std::to_string(a) + " " + std::to_string(b) + " " + color);
+        send("setEdge1Color " + std::to_string(a) + " " + std::to_string(b) + " " + color);
     }
+	void setEdge2Color(int a, int b, const std::string& color) {
+        send("setEdge2Color " + std::to_string(a) + " " + std::to_string(b) + " " + color);
+	}
     void setVertexColor(int v, const std::string& color) {
-        std::cout << "Coloring vertex " << v << " to " << color << std::endl;
         send("setVertexColor " + std::to_string(v) + " " + color);
     }
     void resize(int n){
-        std::cout << "Graph now hold " << n << " vertices" << std::endl;
         send("resize " + std::to_string(n));
     }
 
@@ -70,6 +67,7 @@ private:
             while (!ws)
                 std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
+		std::clog << s << std::endl;
         ws->send(s.c_str(), s.size(), uWS::OpCode::TEXT);
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }

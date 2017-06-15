@@ -87,8 +87,8 @@ var onMessageWS = function (ev) {
 };
 
 var statusBar = function (text, csscls) {
-    $('#status').className = csscls;
-    $('#status-text').textContent = text;
+    $('#status').attr('class', csscls);
+    $('#status-text').text(text);
 }
 
 var bind = function (f, ...xs) {

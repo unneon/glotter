@@ -58,10 +58,10 @@ private:
         std::ifstream file;
         file.exceptions(std::ios::badbit | std::ios::failbit);
         file.open(path, std::ios::binary);
-        std::string buf;
-        std::getline(file, buf, '\0');
-		std::clog << buf << std::endl;
-        return buf;
+        std::stringstream buf;
+        buf << file.rdbuf();
+		std::clog << buf.str() << std::endl;
+        return buf.str();
     }
     void send(const std::string& s) {
         if (!ws) {

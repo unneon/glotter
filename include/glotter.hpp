@@ -60,8 +60,7 @@ private:
         file.open(path, std::ios::binary);
         std::stringstream buf;
         buf << file.rdbuf();
-		std::clog << buf.str() << std::endl;
-        return buf.str();
+		return buf.str();
     }
     void send(const std::string& s) {
         if (!ws) {

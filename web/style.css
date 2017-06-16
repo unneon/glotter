@@ -61,19 +61,19 @@ body {
 }
 
 .status-off {
-    background-color: grey;
+	background-color: grey;
 }
 .status-connecting {
-    background-color: lightseagreen;
+	background-color: lightseagreen;
 }
 .status-ready {
-    background-color: lightgreen;
+	background-color: lightgreen;
 }
 .status-closed {
-    background-color: grey;
+	background-color: grey;
 }
 .status-error, .status-unsupported {
-    background-color: lightcoral;
+	background-color: lightcoral;
 }
 
 .next-off {

@@ -36,16 +36,18 @@ Glotter glotter;
 
 #### Compiling
 
-- `-std=c++14` mode and `-pthread` are required. You also need to add following libraries:
-- `-lssl`. Encryption stuff for the web server. Available in Ubuntu package `libssl-dev`.
-- `-luWS`. It's an embeddable and fast web server supporting WebSocket. Needs to be cloned and compiled from [Github](https://github.com/uNetworking/uWebSockets).
-- `-lz`. A compression library, also required by the web server. Available in Ubuntu package `zlib1g-dev`.
+You will need the following flags:
+- `-std=c++14` I like C++14.
+
+Also, the following libraries:
+- `-pthread` Web server needs this for threading. Doesn't need installation.
+- `-lssl` Web server needs this for encryption stuff. Available in Ubuntu package `libssl-dev`.
+- `-luWS` A web server. Needs to be cloned and compiled from [Github](https://github.com/uNetworking/uWebSockets).
+- `-lz` Web server needs this for theading stuff. Available in Ubuntu package `zlib1g-dev`.
 
 See [Makefile](Makefile) for an example.
 
 #### Running
-
-App requires Internet connection now(it loads some JS libraries). This is temporary.
 
 First, run your compiled app just as you would normally run it. If you are following the BFS test, example input is provided in [test/bfs/input.txt](test/bfs/input.txt) file. Run your favourite browser and load `localhost:57077`.
 
@@ -63,4 +65,4 @@ In left top corner, you can see the status bar. It will tell you if everything i
 Yes, just run it in `gdb`. This is a graph visualization tool, not a complete debugger.
 
 **Can it be used without Internet connection?**
-Temporarily no, but fix is trivial.
+Yes. Browser is required, but all resources all available locally.

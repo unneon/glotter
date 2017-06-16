@@ -46,6 +46,9 @@ public:
                 sharefile("/style.css", "web/style.css");
                 sharefile("/glotter.js", "web/glotter.js");
 				sharefile("/bebas.ttf", "web/BEBAS___.ttf");
+				sharefile("/jquery.js", "web/jquery.min.js");
+				sharefile("/vis.css", "web/vis.min.css");
+				sharefile("/vis.js", "web/vis.min.js");
             }
         });
         uws.onConnection([&, this](uWS::WebSocket<uWS::SERVER>* conn, auto){

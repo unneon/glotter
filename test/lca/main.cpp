@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
+#include <glotter.hpp>
 using namespace std;
+Glotter glotter;
 
 template <typename T> T load() { T r; cin >> r; return r; }
 
 struct Tree {
 	vector<vector<int>> edges;
 	Tree(int n):edges(n){
+		glotter.resize(n);
 	}
 	void addEdge1(int a, int b) {
 		edges[a].push_back(b);
@@ -13,6 +16,7 @@ struct Tree {
 	void addEdge2(int a, int b) {
 		addEdge1(a, b);
 		addEdge1(b, a);
+		glotter.addEdge2(a, b);
 	}
 	int size() { return edges.size(); }
 	int sizelog2() {
@@ -44,12 +48,20 @@ struct Tree {
 	public:
 
 		int lca(int a, int b) {
+			glotter.setVertexColor(a, "#3090C7");
+			glotter.setVertexColor(b, "#3090C7");
 			tie(a, b) = equalHeight(a, b);
+			glotter.setVertexColor(a, "#98FF98");
+			glotter.setVertexColor(b, "#98FF98");
 			for (int i=tree->sizelog2()-1; i>=0; --i) {
+				glotter.setVertexColor(jump[a][i], "#FFA62F");
 				if (jump[a][i] != jump[b][i]) {
 					tie(a, b) = make_pair(jump[a][i], jump[b][i]);
+					glotter.setVertexColor(a, "#FFDB58");
+					glotter.setVertexColor(b, "#FFDB58");
 				}
 			}
+			glotter.setVertexColor(jump[a][0], "#E77471");
 			return jump[a][0];
 		}
 
@@ -69,6 +81,7 @@ struct Tree {
 		}
 	};
 	MachineLCA prepareLCAPow2Jump(int root) {
+		glotter.setVertexColor(root, "#E6A9EC");
 		auto mach = MachineLCA();
 		auto lg = sizelog2();
 		mach.tree = this;

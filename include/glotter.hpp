@@ -20,7 +20,7 @@ public:
                 sharefile("/", "web/index.html");
                 sharefile("/style.css", "web/style.css");
                 sharefile("/glotter.js", "web/glotter.js");
-				sharefile("/bebas.otf", "web/BebasNeue Regular.otf");
+				sharefile("/bebas.ttf", "web/BEBAS___.ttf");
             }
         });
         uws.onConnection([&](uWS::WebSocket<uWS::SERVER>* conn, auto){
@@ -57,9 +57,10 @@ private:
     static std::string readFile(const std::string& path) {
         std::ifstream file;
         file.exceptions(std::ios::badbit | std::ios::failbit);
-        file.open(path);
+        file.open(path, std::ios::binary);
         std::string buf;
         std::getline(file, buf, '\0');
+		std::clog << buf << std::endl;
         return buf;
     }
     void send(const std::string& s) {

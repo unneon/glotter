@@ -2,7 +2,7 @@
 
 @font-face {
 	font-family: 'Bebas';
-	src: url('bebas.otf');
+	src: url('bebas.ttf') format('truetype');
 }
 
 .bar {

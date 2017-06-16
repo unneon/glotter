@@ -65,4 +65,4 @@ In left top corner, you can see the status bar. It will tell you if everything i
 Yes, just run it in `gdb`. This is a graph visualization tool, not a complete debugger.
 
 **Can it be used without Internet connection?**
-Yes. Browser is required, but all resources all available locally.
+Yes. Browser is required, but all resources are available locally.

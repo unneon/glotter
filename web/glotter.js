@@ -4,8 +4,9 @@ var min = (a, b) => b < a ? b : a;
 var max = (a, b) => b > a ? b : a;
 
 var errorHandler = function (msg) {
-    // TODO
-};
+	console.log(msg);
+	alert(msg);
+}
 
 var graph = {
 	nodes: new vis.DataSet([
@@ -93,7 +94,9 @@ graph.network = new vis.Network(graph.container, graph.data, graph.options);
 var onMessageWS = function (ev) {
     var cmd = ev.data.split(' ');
 	// TODO: change this to a map or object[propertyname] call or something
-    if (cmd[0] === "addEdge1") {
+	if (cmd[0] === "pause") {
+		remote.pause();
+	} else if (cmd[0] === "addEdge1") {
         graph.addEdge1(parseInt(cmd[1]), parseInt(cmd[2]));
 	} else if (cmd[0] === "addEdge2") {
 		graph.addEdge2(parseInt(cmd[1]), parseInt(cmd[2]));
@@ -113,6 +116,25 @@ var onMessageWS = function (ev) {
 var statusBar = function (text, csscls) {
     $('#status').attr('class', csscls);
     $('#status-text').text(text);
+}
+var nextButton = function (text, csscls) {
+	$('#next').attr('class', csscls);
+	$('#next-text').text(text);
+}
+
+var remote = {
+	unpause: function() {
+		if (remote.isPaused) {
+			remote.isPaused = false;
+			nextButton('', 'next-off');
+			ws.send("unpause");
+		}
+	},
+	pause: function() {
+		remote.isPaused = true;
+		nextButton('next', 'next-on');
+	},
+	isPaused: false
 }
 
 var bind = function (f, ...xs) {

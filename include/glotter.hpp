@@ -5,6 +5,20 @@
 
 class Glotter {
 
+	class Waiter {
+	public:
+		void wait() {
+			std::unique_lock<std::mutex> lck(mtx);
+			cv.wait(lck);
+		}
+		void notify() {
+			cv.notify_one();
+		}
+	private:
+		std::condition_variable cv;
+		std::mutex mtx;
+	};
+
 public:
 
 	enum class LogLevel { nothing = 0, important = 1, debug = 2 };
@@ -40,6 +54,10 @@ public:
         });
 		uws.onDisconnection([&, this](uWS::WebSocket<uWS::SERVER>*, int, char*, size_t){
 			this->log(LogLevel::important, []{ std::clog << "Disconnected"; });
+		});
+		uws.onMessage([&, this](uWS::WebSocket<uWS::SERVER>*, char* msg, size_t len, uWS::OpCode) {
+			if (std::string(msg, len) == "unpause") { this->pausemech.notify(); }
+			else { this->log(LogLevel::important, [&]{ std::clog << "Unrecognized message!"; }); }
 		});
         uws.listen(port);
         std::thread([&]{uws.run();}).detach();
@@ -85,12 +103,14 @@ private:
         }
 		log(LogLevel::debug, [&]{ std::clog << s; });
         ws->send(s.c_str(), s.size(), uWS::OpCode::TEXT);
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+		ws->send("pause", 5, uWS::OpCode::TEXT);
+		pausemech.wait();
     }
 
     uWS::Hub uws;
     uWS::WebSocket<uWS::SERVER>* ws = nullptr;
 	LogLevel ll = LogLevel::important;
 	unsigned short port = 57077;
+	Waiter pausemech;
 
 };

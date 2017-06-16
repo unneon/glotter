@@ -43,7 +43,7 @@ Also, the following libraries:
 - `-pthread` Web server needs this for threading. Doesn't need installation.
 - `-lssl` Web server needs this for encryption stuff. Available in Ubuntu package `libssl-dev`.
 - `-luWS` A web server. Needs to be cloned and compiled from [Github](https://github.com/uNetworking/uWebSockets).
-- `-lz` Web server needs this for theading stuff. Available in Ubuntu package `zlib1g-dev`.
+- `-lz` Web server needs this for compression stuff. Available in Ubuntu package `zlib1g-dev`.
 
 See [Makefile](Makefile) for an example.
 

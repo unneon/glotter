@@ -51,6 +51,7 @@ struct Tree {
 			glotter.setVertexColor(a, "#3090C7");
 			glotter.setVertexColor(b, "#3090C7");
 			tie(a, b) = equalHeight(a, b);
+			if (a == b) return a;
 			glotter.setVertexColor(a, "#98FF98");
 			glotter.setVertexColor(b, "#98FF98");
 			for (int i=tree->sizelog2()-1; i>=0; --i) {

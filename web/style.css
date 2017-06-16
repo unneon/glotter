@@ -18,6 +18,8 @@
 body {
 	margin: 0;
 	padding: 0;
+	/*width: 100%;
+	height: 100%;*/
 	background-color: #D9DCDD;
 }
 
@@ -27,32 +29,20 @@ body {
 	height: 100%;
 }
 
-#status {
+.bar-place {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	width: 20%;
-	display: block;
-	float: left;
-}
-#status-text {
-	text-align: center;
-	vertical-align: middle;
-	line-height: 92px;
-	font-family: 'Bebas';
-	font-size: 72px;
+	width: 25%;
+	display: inline-block;
+	overflow: hidden;
 }
 
-#next {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	width: 20%;
-	display: block;
-	overflow: hidden;
+#next-place {
 	float: right;
 }
-#next-text {
+
+.big-text {
 	text-align: center;
 	vertical-align: middle;
 	line-height: 92px;

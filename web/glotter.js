@@ -119,7 +119,6 @@ var statusBar = function (text, csscls) {
 }
 var nextButton = function (text, csscls) {
 	$('#next').attr('class', csscls);
-	$('#next-text').text(text);
 }
 
 var remote = {

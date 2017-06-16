@@ -9,12 +9,16 @@
 	<body>
 
 		<div id="controls" class="bar">
-			<div id="status" class="status-off">
-				<div id="status-text">Off</div>
+			<div class="bar-place">
+				<div id="status" class="status-off">
+					<div id="status-text" class="big-text" onselectstart="return false;">Off</div>
+				</div>
 			</div>
-			<a id="next" href="#" onclick="remote.unpause()" class="next-off">
-				<div id="next-text"></div>
-			</a>
+			<div id="next-place" class="bar-place">
+				<div id="next" onclick="remote.unpause()" onselectstart="return false;" class="next-off">
+					<div id="next-text" class="big-text">Next</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="graph"></div>

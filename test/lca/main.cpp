@@ -5,9 +5,15 @@ template <typename T> T load() { T r; cin >> r; return r; }
 
 struct Tree {
 	vector<vector<int>> edges;
-	Tree(int n):edges(n){}
-	void addEdge1(int a, int b) { edges[a].push_back(b); }
-	void addEdge2(int a, int b) { addEdge1(a, b); addEdge1(b, a); }
+	Tree(int n):edges(n){
+	}
+	void addEdge1(int a, int b) {
+		edges[a].push_back(b);
+	}
+	void addEdge2(int a, int b) {
+		addEdge1(a, b);
+		addEdge1(b, a);
+	}
 	int size() { return edges.size(); }
 	int sizelog2() {
 		int r = 0;
@@ -39,9 +45,11 @@ struct Tree {
 
 		int lca(int a, int b) {
 			tie(a, b) = equalHeight(a, b);
-			for (int i=tree->sizelog2()-1; i>=0; --i)
-				if (jump[a][i] != jump[b][i])
+			for (int i=tree->sizelog2()-1; i>=0; --i) {
+				if (jump[a][i] != jump[b][i]) {
 					tie(a, b) = make_pair(jump[a][i], jump[b][i]);
+				}
+			}
 			return jump[a][0];
 		}
 
@@ -52,9 +60,11 @@ struct Tree {
 			return make_pair(a, downTo(b, height[a]));
 		}
 		int downTo(int v, int h) {
-			for (int i=tree->sizelog2()-1; i>=0; --i)
-				if (height[jump[v][i]] >= h)
+			for (int i=tree->sizelog2()-1; i>=0; --i) {
+				if (height[jump[v][i]] >= h) {
 					v = jump[v][i];
+				}
+			}
 			return v;
 		}
 	};

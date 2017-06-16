@@ -29,7 +29,7 @@ Glotter glotter;
 
 	// Then, you can change color of edges/vertices as you like
 	glotter.setVertexColor(verterxNumber, "#ADD8E6");
-	glotter.setEdgeColor(firstVertex, secondVertex, "#888888");
+	glotter.setEdge2Color(firstVertex, secondVertex, "#888888");
 
 	// Glotter will pause the execution after any change automatically
 ```

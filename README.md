@@ -1,7 +1,11 @@
 # glotter
 `glotter` is a tool meant for visualizing graphs and algorithms operating on them for the purposes of debugging. Traditional debuggers such as `gdb` are usually not of much use when it comes to graphs. All they can do is display raw edge lists, which are not clear and intuitive. It gets only worse when we introduce more complicated algorithms such as network flow algorithms. `glotter` changes that by adding a GUI which displays the graph visually. You can also mark various things on the graph for your attention.
 
+Traditional debuggers require only to pass `-g` option to the compiler. This is very convenient, but not possible here. Since algorithms we're talking about are complicated and the result is supposed to look nice, `glotter` needs more information about code than basic debuggers want. However, the API is designed so that work and LoC required are as small as possible, allowing for quick debugging. To show how quickly can you add glotter support to a ready program, see commit [e93c7e4](https://github.com/matcegla/glotter/commit/e93c7d4dd7906396fb8dc6300d193f7809072bbb).
+
 ![Screenshot of example BFS debugging session](help/screen1.jpg "Screen of example BFS debugging session")
+
+![Screenshot of example LCA debugging session](help/screen2.jpg "Screen of example LCA debugging session")
 
 ## Usage
 
@@ -9,11 +13,8 @@
 
 #### Writing code
 
-Full code is available in [test/bfs/main.cpp](test/bfs/main.cpp) file.
+Full example programs with glotter are available in [test/bfs/main.cpp](test/bfs/main.cpp) and [test/lca/main.cpp](test/lca/main.cpp). To see an example of how to add glotter to a ready app, study shown earlier commit [e93c7e4](https://github.com/matcegla/glotter/commit/e93c7d4dd7906396fb8dc6300d193f7809072bbb). Below is an explanation what you need to add and what it does.
 
-Since these algorithms are complicated and the result is supposed to look nice, `glotter` needs more information about code than basic debuggers want. However, the API is designed so that work and LoC required are as small as possible, allowing for quick debugging.
-
-What you need to do is:
 ```cpp
 // Include the header
 #include <glotter.hpp>
@@ -49,7 +50,7 @@ See [Makefile](Makefile) for an example.
 
 #### Running
 
-First, run your compiled app just as you would normally run it. If you are following the BFS test, example input is provided in [test/bfs/input.txt](test/bfs/input.txt) file. Run your favourite browser and load `localhost:57077`.
+First, run your compiled app just as you would normally run it. If you are following the BFS test, example input is provided in [test/bfs/input.txt](test/bfs/input.txt) file; if LCA test, then use [test/lca/input1.txt](test/lca/input1.txt) or [test/lca/input2.txt](test/lca/input2.txt). Run your favourite browser and load `localhost:57077`.
 
 #### Using
 

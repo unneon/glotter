@@ -18,19 +18,19 @@ struct Graph {
 		std::vector<bool> visit(size(), false);
 		visit[vertex] = true;
 		while (not as.empty()) {
-			for (auto v : as) glotter.setVertexColor(v, "#ADD8E6");
+			for (auto v : as) glotter.setVertexColor(v, "lightblue");
 			for (auto v : as) {
 				f(v);
 				for (auto kid : edges[v]) {
-					glotter.setEdge2Color(v, kid, "#888888");
+					glotter.setEdge2Color(v, kid, "gray");
 					if (!visit[kid]) {
 						visit[kid] = true;
 						bs.push_back(kid);
-						glotter.setVertexColor(kid, "#90EE90");
+						glotter.setVertexColor(kid, "lightgreen");
 					}
 				}
 			}
-			for (auto v : as) glotter.setVertexColor(v, "#F08080");
+			for (auto v : as) glotter.setVertexColor(v, "lightcoral");
 			as = std::move(bs);
 		}
 	}

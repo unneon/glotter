@@ -48,21 +48,21 @@ struct Tree {
 	public:
 
 		int lca(int a, int b) {
-			glotter.setVertexColor(a, "#3090C7");
-			glotter.setVertexColor(b, "#3090C7");
+			glotter.setVertexColor(a, "mediumspringgreen");
+			glotter.setVertexColor(b, "mediumspringgreen");
 			tie(a, b) = equalHeight(a, b);
 			if (a == b) return a;
-			glotter.setVertexColor(a, "#98FF98");
-			glotter.setVertexColor(b, "#98FF98");
+			glotter.setVertexColor(a, "lightskyblue");
+			glotter.setVertexColor(b, "lightskyblue");
 			for (int i=tree->sizelog2()-1; i>=0; --i) {
-				glotter.setVertexColor(jump[a][i], "#FFA62F");
+				glotter.setVertexColor(jump[a][i], "lightsalmon");
 				if (jump[a][i] != jump[b][i]) {
 					tie(a, b) = make_pair(jump[a][i], jump[b][i]);
-					glotter.setVertexColor(a, "#FFDB58");
-					glotter.setVertexColor(b, "#FFDB58");
+					glotter.setVertexColor(a, "khaki");
+					glotter.setVertexColor(b, "khaki");
 				}
 			}
-			glotter.setVertexColor(jump[a][0], "#E77471");
+			glotter.setVertexColor(jump[a][0], "fuchsia");
 			return jump[a][0];
 		}
 
@@ -82,7 +82,7 @@ struct Tree {
 		}
 	};
 	MachineLCA prepareLCAPow2Jump(int root) {
-		glotter.setVertexColor(root, "#E6A9EC");
+		glotter.setVertexColor(root, "mediumorchid");
 		auto mach = MachineLCA();
 		auto lg = sizelog2();
 		mach.tree = this;

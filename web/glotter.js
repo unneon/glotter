@@ -26,8 +26,8 @@ var graph = {
 				}
 			},
 			color: {
-				color: "#000000",
-				highlight: "#000000"
+				color: "black",
+				highlight: "black"
 			}
 		});
 	},
@@ -38,8 +38,8 @@ var graph = {
 			to: b,
 			id: a+'<->'+b,
 			color: {
-				color: "#000000",
-				highlight: "#000000"
+				color: "black",
+				highlight: "black"
 			}
 		});
 	},

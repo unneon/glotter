@@ -13,7 +13,7 @@ Traditional debuggers require only to pass `-g` option to the compiler. This is 
 
 #### Writing code
 
-Full example programs with glotter are available in [test/bfs/main.cpp](test/bfs/main.cpp) and [test/lca/main.cpp](test/lca/main.cpp). To see an example of how to add glotter to a ready app, study shown earlier commit [e93c7e4](https://github.com/matcegla/glotter/commit/e93c7d4dd7906396fb8dc6300d193f7809072bbb). Below is an explanation what you need to add and what it does.
+Full example programs with glotter are available in [test/bfs/main.cpp](test/bfs/main.cpp) and [test/lca/main.cpp](test/lca/main.cpp). To see an example of how to add glotter to a ready app, study shown earlier commit [e93c7e4](https://github.com/matcegla/glotter/commit/e93c7d4dd7906396fb8dc6300d193f7809072bbb)(colors like "#F08080" can also be written as their [HTML names](https://www.w3schools.com/tags/ref_colornames.asp), ex. "lightcoral"). Below is an explanation what you need to add and what it does.
 
 ```cpp
 // Include the header
@@ -29,8 +29,8 @@ Glotter glotter;
 	glotter.addEdge2(firstVertex, secondVertex);
 
 	// Then, you can change color of edges/vertices as you like
-	glotter.setVertexColor(verterxNumber, "#ADD8E6");
-	glotter.setEdge2Color(firstVertex, secondVertex, "#888888");
+	glotter.setVertexColor(verterxNumber, "lightblue");
+	glotter.setEdge2Color(firstVertex, secondVertex, "grey");
 
 	// Glotter will pause the execution after any change automatically
 ```

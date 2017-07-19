@@ -32,23 +32,28 @@ public:
 			else if (reqLL == "debug"s) ll = LogLevel::debug;
 			else log(LogLevel::important, [&]{ std::clog << "Unknown log level\"" << reqLL << "\""; });
 		}
+		auto webResourcePrefix = std::string("/usr/share/glotter");
+		if (std::getenv("GLOTTER_WEBRESPREFIX") != nullptr) {
+			webResourcePrefix = getenv("GLOTTER_WEBRESPREFIX");
+		}
+		log(LogLevel::important, [&]{ std::clog << "Using " << webResourcePrefix << " as web resource directory"; });
 
-		uws.onHttpRequest([&](uWS::HttpResponse* res, uWS::HttpRequest req, char* /*data*/, size_t /*len*/, size_t /*remain*/){
+		uws.onHttpRequest([webResourcePrefix, this](uWS::HttpResponse* res, uWS::HttpRequest req, char* /*data*/, size_t /*len*/, size_t /*remain*/){
 			log(LogLevel::debug, [&]{ std::clog << (req.getMethod() == uWS::METHOD_GET ? "GET " : "(unknown method) ") << req.getUrl().toString(); });
 			if (req.getMethod() == uWS::METHOD_GET) {
-				auto sharefile = [&](const char* alias, const char* name){
+				auto sharefile = [&](const char* alias, const std::string& name){
 					if (req.getUrl().toString() == alias) {
 						auto r = readFile(name);
 						res->end(r.c_str(), r.size());
 					}
 				};
-				sharefile("/", "web/index.html");
-				sharefile("/style.css", "web/style.css");
-				sharefile("/glotter.js", "web/glotter.js");
-				sharefile("/bebas.ttf", "web/BEBAS___.ttf");
-				sharefile("/jquery.js", "web/jquery.min.js");
-				sharefile("/vis.css", "web/vis.min.css");
-				sharefile("/vis.js", "web/vis.min.js");
+				sharefile("/", webResourcePrefix + "/index.html");
+				sharefile("/style.css", webResourcePrefix + "/style.css");
+				sharefile("/glotter.js", webResourcePrefix + "/glotter.js");
+				sharefile("/bebas.ttf", webResourcePrefix + "/BEBAS___.ttf");
+				sharefile("/jquery.js", webResourcePrefix + "/jquery.min.js");
+				sharefile("/vis.css", webResourcePrefix + "/vis.min.css");
+				sharefile("/vis.js", webResourcePrefix + "/vis.min.js");
 			}
 		});
 		uws.onConnection([&, this](uWS::WebSocket<uWS::SERVER>* conn, auto){
@@ -109,6 +114,7 @@ private:
 		ws->send("pause", 5, uWS::OpCode::TEXT);
 		pausemech.wait();
 	}
+	template <typename T> T coalesce(const T& a, const T& b) { return a ? a : b; }
 
 	uWS::Hub uws;
 	uWS::WebSocket<uWS::SERVER>* ws = nullptr;

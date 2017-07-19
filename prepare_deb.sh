@@ -30,7 +30,7 @@ ask "Architecture" PKG_ARCH
 debwrite "Priority: optional"
 debwrite "Architecture: $PKG_ARCH"
 ask "Name of uWS package" PKG_DEP_UWS
-debwrite "Depends: libssl-dev zlib1g-dev $PKG_DEP_UWS"
+debwrite "Depends: libssl-dev, zlib1g-dev, $PKG_DEP_UWS"
 ask "Maintainer(and email)" PKG_MAINTAINER
 debwrite "Maintainer: $PKG_MAINTAINER"
 debwrite "Description: graph algorithms debugging visualization tool"

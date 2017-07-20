@@ -21,16 +21,16 @@ run mkdir -p $DIRNAME/DEBIAN
 run cp include/glotter.hpp $DIRNAME/usr/include
 run cp web/* $DIRNAME/usr/share/glotter
 
-echo > $DIRNAME/DEBIAN/control
-debwrite "Package: glotter"
-debwrite "Version: $V"
+run > $DIRNAME/DEBIAN/control
+run debwrite "Package: glotter"
+run debwrite "Version: $V"
 ask "Package section" PKG_SECT
-debwrite "Section: $PKG_SECT"
+run debwrite "Section: $PKG_SECT"
 ask "Architecture" PKG_ARCH
-debwrite "Priority: optional"
-debwrite "Architecture: $PKG_ARCH"
+run debwrite "Priority: optional"
+run debwrite "Architecture: $PKG_ARCH"
 ask "Name of uWS package" PKG_DEP_UWS
-debwrite "Depends: libssl-dev, zlib1g-dev, $PKG_DEP_UWS"
+run debwrite "Depends: libssl-dev, zlib1g-dev, $PKG_DEP_UWS"
 ask "Maintainer(and email)" PKG_MAINTAINER
-debwrite "Maintainer: $PKG_MAINTAINER"
-debwrite "Description: graph algorithms debugging visualization tool"
+run debwrite "Maintainer: $PKG_MAINTAINER"
+run debwrite "Description: graph algorithms debugging visualization tool"

@@ -1,13 +1,13 @@
 #!/bin/bash
 function run {
 	echo "$@"
-	$@
+	"$@"
 }
 function ask {
 	read -p $'\e[1;34m'"$1"$': \e[0m' $2
 }
 function debwrite {
-	echo $1 >> $DIRNAME/DEBIAN/control
+	echo "$1" >> $DIRNAME/DEBIAN/control
 }
 
 ask "Version and revision" V

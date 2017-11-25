@@ -17,6 +17,7 @@ Download repository, build with cmake & make. Example:
 ```bash
 git clone https://github.com/matcegla/glotter
 mkdir glotter/build
+cd glotter/build
 cmake ..
 make
 sudo make install

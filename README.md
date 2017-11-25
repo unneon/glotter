@@ -22,10 +22,12 @@ cmake ..
 make
 sudo make install
 ```
+`cmake` can also take following flags:
+- `-DGLOTTER_BUILD_EXAMPLES=ON` Determines whether examples will be built.
 
 #### Writing code
 
-Full example programs with glotter are available in [test/bfs/main.cpp](test/bfs/main.cpp) and [test/lca/main.cpp](test/lca/main.cpp). To see an example of how to add glotter to a ready app, study shown earlier commit [e93c7e4](https://github.com/matcegla/glotter/commit/e93c7d4dd7906396fb8dc6300d193f7809072bbb)(colors like "#F08080" can also be written as their [HTML names](https://www.w3schools.com/tags/ref_colornames.asp), ex. "lightcoral"). Below is an explanation what you need to add and what it does.
+Full example programs with glotter are available in [examples/bfs/main.cpp](examples/bfs/main.cpp) and [examples/lca/main.cpp](examples/lca/main.cpp). To see an example of how to add glotter to a ready app, study shown earlier commit [e93c7e4](https://github.com/matcegla/glotter/commit/e93c7d4dd7906396fb8dc6300d193f7809072bbb)(colors like "#F08080" can also be written as their [HTML names](https://www.w3schools.com/tags/ref_colornames.asp), ex. "lightcoral"). Below is an explanation what you need to add and what it does.
 
 ```cpp
 // Include the header
@@ -59,12 +61,12 @@ Compile your program normally, but with following flags:
 
 Example command to build the BFS test would be:
 ```bash
-g++ test/bfs/main.cpp -std=c++11 -lglotter -luWS -lz -lssl -pthread
+g++ examples/bfs/main.cpp -std=c++11 -lglotter -luWS -lz -lssl -pthread
 ```
 
 #### Running
 
-First, run your compiled app just as you would normally run it. If you are following the BFS test, example input is provided in [test/bfs/input.txt](test/bfs/input.txt) file; if LCA test, then use [test/lca/input1.txt](test/lca/input1.txt) or [test/lca/input2.txt](test/lca/input2.txt). Run your favourite browser and load `localhost:57077`.
+First, run your compiled app just as you would normally run it. If you are following the BFS test, example input is provided in [examples/bfs/input.txt](examples/bfs/input.txt) file; if LCA test, then use [examples/lca/input1.txt](examples/lca/input1.txt) or [examples/lca/input2.txt](examples/lca/input2.txt). Run your favourite browser and load `localhost:57077`.
 
 #### Using
 

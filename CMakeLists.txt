@@ -1,16 +1,30 @@
 cmake_minimum_required(VERSION 3.0)
 project(glotter)
+set(CMAKE_CXX_STANDARD 11)
+
+option(GLOTTER_BUILD_EXAMPLES "Build some exampple glotter programs" ON)
+
+function(glotter_add_example name)
+	add_executable(glotter-examples-${name} examples/${name}/main.cpp)
+	target_link_libraries(glotter-examples-${name} glotter ${UWEBSOCKETS_LIBRARY} ${ZLIB_LIBRARIES} ${OPENSSL_LIBRARIES} Threads::Threads)
+endfunction(glotter_add_example)
+
+find_path(UWEBSOCKETS_INCLUDE_DIR uWS/uWS.h)
+find_library(UWEBSOCKETS_LIBRARY uWS)
+find_package(Threads REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(ZLIB REQUIRED)
 
 set(CMAKE_CXX_STANDARD 11)
-set(SOURCE_FILES include/glotter.hpp src/glotter.cpp)
-add_library(glotter ${SOURCE_FILES})
-
+set(GLOTTER_SOURCE_FILES include/glotter.hpp src/glotter.cpp)
+add_library(glotter ${GLOTTER_SOURCE_FILES})
+include_directories(glotter ${UWEBSOCKETS_INCLUDE_DIR})
+target_link_libraries(glotter ${UWEBSOCKETS_LIBRARY})
 install(TARGETS glotter DESTINATION lib)
 install(FILES include/glotter.hpp DESTINATION include)
 install(DIRECTORY web DESTINATION share/glotter)
 
-# Dependency - uWebSockets
-find_path(UWEBSOCKETS_INCLUDE_DIR uWS/uWS.h)
-find_library(UWEBSOCKETS_LIBRARY uWS)
-include_directories(glotter ${UWEBSOCKETS_INCLUDE_DIR})
-target_link_libraries(glotter ${UWEBSOCKETS_LIBRARY})
+if(GLOTTER_BUILD_EXAMPLES)
+	glotter_add_example(bfs)
+	glotter_add_example(lca)
+endif(GLOTTER_BUILD_EXAMPLES)

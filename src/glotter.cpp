@@ -30,10 +30,9 @@ bool operator>=(Glotter::LogLevel a, Glotter::LogLevel b) {
 
 Glotter::Glotter(){
     if (auto reqLL = getenv("GLOTTER_LOGLEVEL")) {
-        using namespace std::string_literals;
-        if (reqLL == "nothing"s) ll = LogLevel::nothing;
-        else if (reqLL == "important"s) ll = LogLevel::important;
-        else if (reqLL == "debug"s) ll = LogLevel::debug;
+        if (reqLL == std::string("nothing")) ll = LogLevel::nothing;
+        else if (reqLL == std::string("important")) ll = LogLevel::important;
+        else if (reqLL == std::string("debug")) ll = LogLevel::debug;
         else log(LogLevel::important, [&]{ std::clog << "Unknown log level\"" << reqLL << "\""; });
     }
     auto webResourcePrefix = std::string(".");
@@ -63,7 +62,7 @@ Glotter::Glotter(){
             sharefile("/vis.js", webResourcePrefix + "/vis.min.js");
         }
     });
-    uws.onConnection([&, this](uWS::WebSocket<uWS::SERVER>* conn, auto){
+    uws.onConnection([&, this](uWS::WebSocket<uWS::SERVER>* conn, const uWS::HttpRequest&){
         this->log(LogLevel::important, []{ std::clog << "Connected"; });
         ws = conn;
     });

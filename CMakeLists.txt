@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(glotter)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES include/glotter.hpp src/glotter.cpp)
 add_library(glotter ${SOURCE_FILES})
 

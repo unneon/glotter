@@ -8,10 +8,12 @@ addons:
       - zlib1g-dev
       - libssl-dev
 install:
-  - git clone https://github.com/uNetworking/uWebSockets
-  -   cd uWebSockets
+  - mkdir deps
+  - git clone https://github.com/uNetworking/uWebSockets deps/uWebSockets
+  -   cd deps/uWebSockets
   -   make
   -   sudo make install
+  -   cd ../..
 script:
   - mkdir build
   - cd build

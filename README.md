@@ -11,6 +11,17 @@ Traditional debuggers require only to pass `-g` option to the compiler. This is 
 
 ### Basic example
 
+#### Installation
+
+Download repository, build with cmake & make. Example:
+```bash
+git clone https://github.com/matcegla/glotter
+mkdir glotter/build
+cmake ..
+make
+sudo make install
+```
+
 #### Writing code
 
 Full example programs with glotter are available in [test/bfs/main.cpp](test/bfs/main.cpp) and [test/lca/main.cpp](test/lca/main.cpp). To see an example of how to add glotter to a ready app, study shown earlier commit [e93c7e4](https://github.com/matcegla/glotter/commit/e93c7d4dd7906396fb8dc6300d193f7809072bbb)(colors like "#F08080" can also be written as their [HTML names](https://www.w3schools.com/tags/ref_colornames.asp), ex. "lightcoral"). Below is an explanation what you need to add and what it does.
@@ -37,16 +48,18 @@ Glotter glotter;
 
 #### Compiling
 
-You will need the following flags:
-- `-std=c++14` I like C++14.
-
-Also, the following libraries:
-- `-pthread` Web server needs this for threading. Doesn't need installation.
-- `-lssl` Web server needs this for encryption stuff. Available in Ubuntu package `libssl-dev`.
-- `-luWS` A web server. Needs to be cloned and compiled from [Github](https://github.com/uNetworking/uWebSockets).
+Compile your program normally, but with following flags:
+- `-std=c++11` I like C++11.
+- `-lglotter` This is us!
+- `-luWS` A web server called [uWebSockets](https://github.com/uNetworking/uWebSockets). I am not aware of an Ubuntu package.
 - `-lz` Web server needs this for compression stuff. Available in Ubuntu package `zlib1g-dev`.
+- `-lssl` Web server needs this for encryption stuff. Available in Ubuntu package `libssl-dev`.
+- `-pthread` Web server needs this for threading. Doesn't require installation.
 
-See [Makefile](Makefile) for an example.
+Example command to build the BFS test would be:
+```bash
+g++ test/bfs/main.cpp -std=c++11 -lglotter -luWS -lz -lssl -pthread
+```
 
 #### Running
 
@@ -60,7 +73,7 @@ Under the control bar, your graph should be displayed. You can drag nodes around
 
 In left top corner, you can see the status bar. It will tell you if everything is working correctly(it should be green with a "Ready" text).
 
-## ~~FA~~Q
+## ~~F~~AQ
 
 **Can this be used simultaneously with a normal debugger?**
 Yes, just run it in `gdb`. This is a graph visualization tool, not a complete debugger.

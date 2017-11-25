@@ -1,0 +1,19 @@
+language: cpp
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+      - cmake
+      - zlib1g-dev
+      - libssl-dev
+install:
+  - git clone https://github.com/uNetworking/uWebSockets
+  -   cd uWebSockets
+  -   make
+  -   sudo make install
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
